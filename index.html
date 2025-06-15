@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"></head>
+<body>
+    <div class="headline">
+        <p>It's just a regular letter — go ahead and click it!</p>
+    </div>
+    <div class="container">
+        <div class="envelope_top">
+            <div class="envelope_top_center"></div>
+            <div class="envelope_top_bottom"></div>
+            <div class="envelope_top_left"></div>
+            <div class="envelope_top_right"></div>
+        </div>
+        <div class="envelope">
+            <div class="envelope_cover"></div>
+            <div class="cards" id="cards">
+                <p>Good Night!!! <br><br> - Lenny</p>
+                <!-- <div class="heart">
+                    <div class="heart_left"></div>
+                    <div class="heart_right"></div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+<script>
+    const envelope_top = document.querySelector('.envelope_top');
+    const envelope = document.querySelector('.envelope');
+    const cards = document.getElementById('cards');
+    let isOpen = false;
+    let animating = false;
+
+    envelope_top.addEventListener('click', function () {
+        if (animating) return;
+
+        animating = true;
+
+        if (!isOpen) {
+            envelope.classList.add('open');
+
+            setTimeout(() => {
+                cards.style.animation = 'cardsgetshown 1s forwards';
+                isOpen = true;
+                animating = false;
+            }, 1000);
+        } else {
+            cards.style.animation = 'cardsgetshide 1s forwards';
+
+            setTimeout(() => {
+                envelope.classList.remove('open');
+                isOpen = false;
+                animating = false;
+            }, 1000);
+        }
+    });
+</script>
+
+</body>
+</html>
