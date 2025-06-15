@@ -8,6 +8,8 @@
 <body>
     <div class="headline">
         <p>It's just a regular letter — go ahead and click it!</p>
+        <p id="germanTime"></p>
+        <p id="laTime"></p>
     </div>
     <div class="container">
         <div class="envelope_top">
@@ -19,7 +21,8 @@
         <div class="envelope">
             <div class="envelope_cover"></div>
             <div class="cards" id="cards">
-                <p>Good Night!!! <br><br> - Lenny</p>
+                <p id="message"></p>
+                <p id="signature">– Lenny</p>
                 <!-- <div class="heart">
                     <div class="heart_left"></div>
                     <div class="heart_right"></div>
@@ -31,17 +34,32 @@
     const envelope_top = document.querySelector('.envelope_top');
     const envelope = document.querySelector('.envelope');
     const cards = document.getElementById('cards');
+    const message = document.getElementById("message");
     let isOpen = false;
     let animating = false;
 
     envelope_top.addEventListener('click', function () {
         if (animating) return;
 
+        const time = getCurrentLocalHour();
+        let timeLabel = "";
+
+        if (time >= 5 && time <= 10) {
+            timeLabel = "Good morning";
+        } else if (time > 10 && time < 16) {
+            timeLabel = "Good midday";
+        } else if (time >= 16 && time < 20) {
+            timeLabel = "Good evening";
+        } else {
+            timeLabel = "Good night";
+        }
+
+        message.innerHTML = timeLabel;
+
         animating = true;
 
         if (!isOpen) {
             envelope.classList.add('open');
-
             setTimeout(() => {
                 cards.style.animation = 'cardsgetshown 1s forwards';
                 isOpen = true;
@@ -49,7 +67,6 @@
             }, 1000);
         } else {
             cards.style.animation = 'cardsgetshide 1s forwards';
-
             setTimeout(() => {
                 envelope.classList.remove('open');
                 isOpen = false;
@@ -57,7 +74,13 @@
             }, 1000);
         }
     });
+
+    function getCurrentLocalHour() {
+        const now = new Date();
+        return now.getHours(); // 0-23
+    }
 </script>
+
 
 </body>
 </html>

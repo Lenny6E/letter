@@ -87,7 +87,7 @@ p {
     margin: 0 auto;
     width: 300px;
     height: 200px;
-    background: #dcdcdc;
+    background: #f0f0f0;
     opacity: 0;
     display: flex;
     justify-content: center;
@@ -95,6 +95,7 @@ p {
     position: relative;
     z-index: 5;
     border-radius: 10px;
+    flex-direction: column;
 }
 
 .envelope.open .cards {
